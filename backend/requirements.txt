@@ -1,0 +1,6 @@
+nexttoken
+Pillow
+supabase
+python-dotenv
+passlib
+python-multipart

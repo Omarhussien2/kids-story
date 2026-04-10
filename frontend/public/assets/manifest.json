@@ -1,0 +1,147 @@
+{
+  "react_icons": [
+    {
+      "brand": "Magic Wand",
+      "export_name": "SiMagic",
+      "usage": "processing_indicator",
+      "reason": "Standard representation for AI 'magic' processing"
+    },
+    {
+      "brand": "Upload",
+      "export_name": "SiCloudupload",
+      "usage": "upload_button",
+      "reason": "Clear iconography for photo uploading"
+    },
+    {
+      "brand": "Microphone",
+      "export_name": "SiSimpleicons",
+      "usage": "voice_recording",
+      "reason": "Fallback icon; SiMicrophone is preferred but verifying slug"
+    }
+  ],
+  "downloaded_assets": [
+    {
+      "id": "hero-magical-book",
+      "kind": "photo",
+      "filename": "hero-magical-book.jpg",
+      "title": "Magical Glowing Book",
+      "description": "A close-up of a child's hands holding a book illuminated by magical string lights, creating a warm and enchanting feel.",
+      "visual_description": "Close-up of a child's hands and torso, wearing a soft brown shirt, holding an open book. Warm golden string lights are draped over the book, casting a magical glow. Soft bokeh background.",
+      "color_notes": "Warm golden ambers, deep browns, and soft cream. Excellent for 'magical' storytelling themes.",
+      "mood": "Magical, warm, enchanting",
+      "placement": "hero",
+      "recommended": true,
+      "alt_text": "Child reading a magical glowing book with warm lights",
+      "dimensions": "2133x1200",
+      "source_page_url": "https://www.pexels.com/photo/person-holding-illuminated-string-lights-while-reading-a-book-7494552/",
+      "provider": "Pexels",
+      "photographer": "Artem Podrez",
+      "verified_via": "read_image",
+      "why_it_was_chosen": "Perfectly captures the 'Khayal' (Imagination) aspect with its magical lighting and child-centric focus."
+    },
+    {
+      "id": "hero-egyptian-princess",
+      "kind": "photo",
+      "filename": "hero-egyptian-princess.jpg",
+      "title": "Little Egyptian Princess",
+      "description": "A high-quality portrait of a young girl dressed in traditional Ancient Egyptian attire, standing in a desert setting.",
+      "visual_description": "Full-body portrait of a young girl with long dark hair, wearing a white pleated Egyptian gown, golden crown with cobra symbol, and elaborate beaded collar. Desert dunes in the background under a soft sky.",
+      "color_notes": "Desert sand beiges, gold accents, and bright turquoise beads. Strong cultural Egyptian theme.",
+      "mood": "Playful, majestic, Egyptian",
+      "placement": "hero",
+      "recommended": false,
+      "alt_text": "Little girl dressed as an Egyptian princess in the desert",
+      "dimensions": "800x1200",
+      "source_page_url": "https://www.pexels.com/photo/a-young-girl-dressed-as-an-egyptian-princess-14727211/",
+      "provider": "Pexels",
+      "photographer": "Ismael Abdal Naby studio",
+      "verified_via": "read_image",
+      "why_it_was_chosen": "Directly addresses the 'Egyptian' theme requested, providing a high-quality cultural touchstone for the app's visual identity."
+    },
+    {
+      "id": "card-character-egyptian",
+      "kind": "photo",
+      "filename": "card-character-1.jpg",
+      "title": "Stylized Character Reference",
+      "description": "A charming portrait of a young child with vibrant cultural jewelry, serving as a character style reference for stories.",
+      "visual_description": "Portrait of a young girl with a joyful expression, wearing a beaded headpiece and golden earrings. Soft natural forest background, warm skin tones.",
+      "color_notes": "Warm browns, bright red and white bead accents, golden jewelry glints.",
+      "mood": "Playful, friendly, creative",
+      "placement": "card_media",
+      "recommended": true,
+      "alt_text": "Cute child character with beaded jewelry for storybook reference",
+      "dimensions": "600x600",
+      "source_page_url": "https://www.pexels.com/photo/cute-girl-in-leaf-costume-in-wild-nature-15245238/",
+      "provider": "Pexels",
+      "photographer": "DIALO Photography",
+      "verified_via": "read_image",
+      "why_it_was_chosen": "Serves as an excellent 'before' or 'style reference' for the AI-generated storybook characters."
+    },
+    {
+      "id": "bg-paper-scroll",
+      "kind": "photo",
+      "filename": "bg-paper-texture.jpg",
+      "title": "Subtle Paper Texture",
+      "description": "A clean, off-white textured paper background, perfect for use as a scroll or story page backdrop.",
+      "visual_description": "Uniform, high-resolution texture of off-white paper with subtle grain and occasional darker flecks. Minimalist and non-distracting.",
+      "color_notes": "Cream, beige, off-white (#F4F0E5). Very neutral.",
+      "mood": "Classic, clean, tactile",
+      "placement": "background",
+      "recommended": true,
+      "alt_text": "Subtle off-white paper texture for story scroll",
+      "dimensions": "1620x1080",
+      "source_page_url": "https://www.pexels.com/photo/off-white-paper-background-8941369/",
+      "provider": "Pexels",
+      "photographer": "Clarissa Schwarz",
+      "verified_via": "read_image",
+      "why_it_was_chosen": "Requested 'scroll' texture that isn't too heavy or distracting for reading text in the story previewer."
+    },
+    {
+      "id": "bg-magical-mesh",
+      "kind": "photo",
+      "filename": "bg-magical-mesh.jpg",
+      "title": "Magical Mesh Gradient",
+      "description": "A vibrant and soft abstract gradient featuring warm orange and cool purple tones.",
+      "visual_description": "Smooth radial transitions between soft orange, pastel purple, and hints of gold. Atmospheric and ethereal.",
+      "color_notes": "Pastel purple (#DBAAC2), soft orange, and warm pinks.",
+      "mood": "Magical, ethereal, modern",
+      "placement": "background",
+      "recommended": false,
+      "alt_text": "Magical orange and purple mesh gradient background",
+      "dimensions": "6000x4000",
+      "source_page_url": "https://images.pexels.com/photos/7135057/pexels-photo-7135057.jpeg",
+      "provider": "Pexels",
+      "photographer": "Codioful",
+      "verified_via": "file_size_check_only",
+      "why_it_was_chosen": "Alternative background for the hero or onboarding sections to reinforce the 'magical' theme."
+    }
+  ],
+  "missing_assets": [
+    {
+      "requested_asset": "Sphinx/Pyramid Icon (Downloadable)",
+      "reason": "Could not find a high-quality, verified standalone SVG for a Pyramid/Sphinx that fits the playful theme; recommend using SiPyramid if available or a custom CSS shape."
+    },
+    {
+      "requested_asset": "Logo (Playful K)",
+      "reason": "Official logo not found on domain; suggest using a stylized 'K' with a playful font (e.g., Fredoka One) and the primary magical color."
+    }
+  ],
+  "css_textures": [
+    {
+      "class_name": "bg-mesh",
+      "placement": "hero_background",
+      "description": "Soft radial gradients for a magical, dreamy atmosphere"
+    },
+    {
+      "class_name": "bg-dot-grid",
+      "placement": "onboarding_cards",
+      "description": "Subtle dot pattern to give a 'creative workshop' feel to photo upload steps"
+    }
+  ],
+  "usage_notes": [
+    "Use 'hero-magical-book.jpg' as the primary hero image for the landing page.",
+    "Use 'bg-paper-texture.jpg' as the background for the <div> containing the story text to simulate a parchment scroll.",
+    "The 'hero-egyptian-princess.jpg' image is portrait; use it in a sidebar or as a featured story cover rather than a full-width top hero.",
+    "Layer the 'bg-magical-mesh.jpg' at low opacity (10-20%) over sections to add warmth without reducing readability."
+  ]
+}
