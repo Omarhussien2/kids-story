@@ -66,7 +66,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ storyId, onSuccess, onBack }
               <span className="text-xl font-bold font-heading text-amber-900 select-all">khayal_masr@instapay</span>
               <Button size="sm" variant="ghost" className="text-amber-600">نسخ الرقم</Button>
             </div>
-            <div className="text-sm text-muted-foreground text-right space-y-2">
+            <div className="text-sm text-muted-foreground text-start space-y-2">
               <p>١. افتح تطبيق إنستا باي.</p>
               <p>٢. ابعت ٢٠٠ جنيه للرقم اللي فوق.</p>
               <p>٣. خد لقطة شاشة (Screenshot) للتحويل.</p>
@@ -115,7 +115,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ storyId, onSuccess, onBack }
               onClick={handleSubmit}
             >
               {isSubmitting ? 'بيتم الرفع...' : 'تأكيد الطلب'}
-              <Check className="mr-2 h-5 w-5" />
+              <Check className="me-2 h-5 w-5" />
             </Button>
           </CardFooter>
         </Card>
@@ -185,9 +185,9 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ storyId }) => {
 
       <div className="relative">
         {/* Connecting Line */}
-        <div className="absolute top-1/2 left-0 w-full h-1 bg-muted -translate-y-1/2 z-0 hidden md:block" />
+        <div className="absolute top-1/2 right-0 w-full h-1 bg-muted -translate-y-1/2 z-0 hidden md:block" />
         <div 
-          className="absolute top-1/2 left-0 h-1 bg-amber-500 -translate-y-1/2 z-0 transition-all duration-1000 hidden md:block" 
+          className="absolute top-1/2 right-0 h-1 bg-amber-500 -translate-y-1/2 z-0 transition-all duration-1000 hidden md:block" 
           style={{ width: `${(currentIdx / (stages.length - 1)) * 100}%` }}
         />
 
@@ -226,14 +226,14 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ storyId }) => {
           <div className="w-48 h-48 rounded-xl overflow-hidden shadow-lg transform -rotate-3 border-8 border-white">
             <img src="./assets/card-book-open.jpg" alt="Story Preview" className="w-full h-full object-cover" />
           </div>
-          <div className="flex-1 space-y-4 text-center md:text-right">
+          <div className="flex-1 space-y-4 text-center md:text-start">
             <h3 className="text-2xl font-bold font-heading text-amber-900">حكايتكم بتتحول لواقع!</h3>
             <p className="text-muted-foreground leading-relaxed">
               فريق أرنوب مهتم جداً بكل تفصيلة في قصة بطلنا الصغير. القصة دلوقتي في مرحلة {stages[currentIdx].label}، وهتوصل لكم قريب جداً.
             </p>
-            <div className="pt-2 flex flex-wrap justify-center md:justify-end gap-3">
+            <div className="pt-2 flex flex-wrap justify-center md:justify-start gap-3">
               <Button variant="outline" size="sm" onClick={() => window.print()}>
-                <Download className="mr-2 h-4 w-4" /> تحميل نسخة PDF
+                <Download className="me-2 h-4 w-4" /> تحميل نسخة PDF
               </Button>
               <Button size="sm" onClick={fetchStatus}>
                 تحديث الحالة

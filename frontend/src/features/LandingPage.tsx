@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { cn } from '../lib/utils';
-import { Sparkles, BookOpen, CreditCard, Truck, Printer, ArrowRight, Star } from 'lucide-react';
+import { Sparkles, BookOpen, CreditCard, Truck, Printer, ArrowLeft, ArrowRight, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface LandingPageProps {
@@ -55,10 +55,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrack }) =>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pt-20">
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8 text-right order-2 lg:order-1"
+            className="space-y-8 text-start order-2 lg:order-1"
             dir="rtl"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime-100 text-[#7FCC00] font-black text-sm mb-4">
@@ -79,7 +79,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrack }) =>
                 className="btn-primary text-xl px-12 py-8 rounded-[2rem] shadow-2xl shadow-lime-500/20"
               >
                 ابدأ المغامرة الآن
-                <Sparkles className="mr-3 h-6 w-6" />
+                <Sparkles className="me-3 h-6 w-6" />
               </Button>
               <Button 
                 size="xl" 
@@ -88,7 +88,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrack }) =>
                 className="bg-white border-2 border-slate-100 text-slate-600 text-xl px-12 py-8 rounded-[2rem] hover:bg-slate-50 transition-all font-bold"
               >
                 تتبع طلبك
-                <Truck className="mr-3 h-6 w-6" />
+                <Truck className="me-3 h-6 w-6" />
               </Button>
             </div>
           </motion.div>
@@ -111,7 +111,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrack }) =>
                      <div className="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center">
                         <Star className="text-amber-500 fill-amber-500" />
                      </div>
-                     <div className="text-right">
+                     <div className="text-start">
                         <p className="text-xs text-slate-400 font-black">تقييم الأمهات</p>
                         <p className="font-black text-slate-900">٤.٩ / ٥ نجوم</p>
                      </div>
@@ -195,7 +195,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrack }) =>
           
           <div className="pt-8 flex justify-center">
             <Button onClick={onStart} size="lg" className="rounded-full px-12 py-6 text-lg">
-              ابدأ الآن <ArrowRight className="mr-2 h-5 w-5" />
+              ابدأ الآن <ArrowLeft className="me-2 h-5 w-5" />
             </Button>
           </div>
         </div>
