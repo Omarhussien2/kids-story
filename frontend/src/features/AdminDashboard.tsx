@@ -43,9 +43,9 @@ export const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => 
 
   const getStatusBadge = (status: string) => {
     const variants: Record<string, string> = {
-      'ready': 'bg-amber-100 text-amber-700 border-amber-200',
-      'paid': 'bg-emerald-100 text-emerald-700 border-emerald-200',
-      'printing': 'bg-blue-100 text-blue-700 border-blue-200',
+      'ready': 'bg-orange-100 text-orange-700 border-orange-200',
+      'paid': 'bg-blue-100 text-blue-700 border-blue-200',
+      'printing': 'bg-lime-100 text-[#7FCC00] border-lime-200',
       'shipped': 'bg-slate-100 text-slate-700 border-slate-200'
     };
     return (
@@ -57,13 +57,15 @@ export const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => 
 
   return (
     <div className="max-w-7xl mx-auto py-12 px-4 space-y-8">
-      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-8">
         <div className="space-y-1">
-          <h2 className="text-3xl font-heading font-bold text-amber-900 flex items-center gap-3">
-            <LayoutDashboard className="h-8 w-8 text-amber-500" />
-            لوحة تحكم خيال مصر
+          <h2 className="text-3xl font-black text-slate-900 flex items-center gap-4">
+            <div className="w-12 h-12 bg-[#7FCC00] rounded-2xl flex items-center justify-center shadow-lg">
+              <LayoutDashboard className="h-7 w-7 text-white" />
+            </div>
+            لوحة تحكم أرنوب
           </h2>
-          <p className="text-muted-foreground">إدارة قصص الأطفال والطلبات والمتابعة.</p>
+          <p className="text-slate-500 font-bold pr-16">إدارة قصص الأطفال والطلبات والمتابعة.</p>
         </div>
         <div className="flex gap-3">
           <Button variant="outline" onClick={fetchOrders} disabled={loading}>
@@ -78,10 +80,10 @@ export const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => 
       {/* Stats Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'إجمالي القصص', value: orders.length, icon: FileText, color: 'text-amber-600', bg: 'bg-amber-100' },
-          { label: 'بانتظار الدفع', value: orders.filter(o => o.status === 'ready').length, icon: CreditCard, color: 'text-rose-600', bg: 'bg-rose-100' },
-          { label: 'قيد الطباعة', value: orders.filter(o => o.status === 'printing').length, icon: Printer, color: 'text-blue-600', bg: 'bg-blue-100' },
-          { label: 'تم التوصيل', value: orders.filter(o => o.status === 'shipped').length, icon: Truck, color: 'text-emerald-600', bg: 'bg-emerald-100' }
+          { label: 'إجمالي القصص', value: orders.length, icon: FileText, color: 'text-slate-600', bg: 'bg-slate-50' },
+          { label: 'بانتظار الدفع', value: orders.filter(o => o.status === 'ready').length, icon: CreditCard, color: 'text-orange-500', bg: 'bg-orange-50' },
+          { label: 'قيد الطباعة', value: orders.filter(o => o.status === 'printing').length, icon: Printer, color: 'text-[#7FCC00]', bg: 'bg-lime-50' },
+          { label: 'تم التوصيل', value: orders.filter(o => o.status === 'shipped').length, icon: Truck, color: 'text-blue-500', bg: 'bg-blue-50' }
         ].map((stat, i) => (
           <Card key={i}>
             <CardContent className="p-6">
@@ -99,7 +101,7 @@ export const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => 
         ))}
       </div>
 
-      <Card className="shadow-soft border-amber-100">
+      <Card className="shadow-2xl border-none rounded-[2rem] overflow-hidden bg-white">
         <CardHeader>
           <CardTitle className="font-heading">جدول الطلبات</CardTitle>
           <CardDescription>متابعة وتحديث حالة كل قصة تم تأليفها.</CardDescription>
@@ -127,7 +129,7 @@ export const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => 
                     <TableRow key={order.id}>
                       <TableCell className="font-bold">#{order.id}</TableCell>
                       <TableCell>
-                        <div className="font-medium text-amber-900">{order.child_name}</div>
+                        <div className="font-black text-slate-900">{order.child_name}</div>
                         <div className="text-xs text-muted-foreground">{order.age} سنين - {order.gender}</div>
                       </TableCell>
                       <TableCell className="text-xs text-muted-foreground">{new Date(order.created_at).toLocaleDateString('ar-EG')}</TableCell>

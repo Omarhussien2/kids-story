@@ -130,21 +130,24 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
     switch(step) {
       case 1:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <div className="text-center space-y-2">
-              <h2 className="text-2xl font-heading font-bold text-amber-900">أهلاً بك في عالم الخيال</h2>
-              <p className="text-muted-foreground">لنبدأ برفع صورة بطل قصتنا الصغير</p>
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
+            <div className="text-center space-y-3">
+              <h2 className="text-3xl font-black text-slate-900 tracking-tight">قربنا نخلص!</h2>
+              <p className="text-slate-500 font-bold">ارفع صورة بطلنا الصغير عشان السحر يكمل</p>
             </div>
             
-            <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex flex-col items-center justify-center gap-6">
               <div className={cn(
-                "relative w-48 h-48 rounded-full border-4 border-dashed border-amber-200 flex items-center justify-center overflow-hidden bg-amber-50/50 transition-all",
-                formData.photo && "border-solid border-amber-500 shadow-xl"
+                "relative w-56 h-56 rounded-[3rem] border-4 border-dashed border-slate-200 flex items-center justify-center overflow-hidden bg-slate-50 transition-all group hover:border-[#7FCC00]",
+                formData.photo && "border-solid border-[#7FCC00] shadow-2xl scale-105"
               )}>
                 {formData.photo ? (
                   <img src={formData.photo} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
-                  <Camera className="w-12 h-12 text-amber-300" />
+                  <div className="flex flex-col items-center gap-3 text-slate-300 group-hover:text-[#7FCC00] transition-colors">
+                    <Camera className="w-16 h-16" />
+                    <span className="text-xs font-black">ارفع الصورة هنا</span>
+                  </div>
                 )}
                 <input 
                   type="file" 
@@ -153,8 +156,8 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
                   onChange={handlePhotoUpload}
                 />
               </div>
-              <Button variant="outline" className="relative">
-                {formData.photo ? 'تغيير الصورة' : 'اختر صورة'}
+              <Button className="btn-outline h-12">
+                {formData.photo ? 'تغيير الصورة' : 'اختر صورة من موبايلك'}
                 <input 
                   type="file" 
                   accept="image/*" 
@@ -164,89 +167,91 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
               </Button>
             </div>
 
-            <div className="flex justify-end pt-4">
-              <Button onClick={() => setStep(2)} disabled={!formData.child_name && step === 2}>
-                التالي <ChevronLeft className="mr-2 h-4 w-4" />
+            <div className="flex justify-center pt-4">
+              <Button className="btn-primary w-full h-14 text-lg" onClick={() => setStep(2)}>
+                التالي
               </Button>
             </div>
           </motion.div>
         );
       case 2:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8" dir="rtl">
             <div className="text-center space-y-2">
-              <h2 className="text-2xl font-heading font-bold text-amber-900">بيانات البطل</h2>
-              <p className="text-muted-foreground">أخبرنا قليلاً عن طفلك</p>
+              <h2 className="text-3xl font-black text-slate-900">بيانات البطل</h2>
+              <p className="text-slate-500 font-bold">أخبرنا قليلاً عن طفلك</p>
             </div>
             
-            <div className="grid gap-4">
-              <div className="space-y-2">
-                <Label>اسم الطفل</Label>
+            <div className="grid gap-6">
+              <div className="space-y-3">
+                <Label className="text-slate-700 font-black pr-2">اسم الطفل</Label>
                 <Input 
+                  className="h-14 rounded-2xl border-slate-200 bg-slate-50 font-bold text-lg focus:border-[#7FCC00] focus:ring-[#7FCC00]"
                   placeholder="مثال: يوسف، مريم..." 
                   value={formData.child_name} 
                   onChange={e => setFormData(prev => ({ ...prev, child_name: e.target.value }))}
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>العمر</Label>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <Label className="text-slate-700 font-black pr-2">العمر</Label>
                   <Select value={formData.age} onValueChange={val => setFormData(prev => ({ ...prev, age: val }))}>
-                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectTrigger className="h-14 rounded-2xl border-slate-200 bg-slate-50 font-bold"><SelectValue /></SelectTrigger>
                     <SelectContent>
-                      {[3,4,5,6,7,8,9,10,11,12].map(a => <SelectItem key={a} value={a.toString()}>{a} سنوات</SelectItem>)}
+                      {[3,4,5,6,7,8,9,10,11,12].map(a => <SelectItem key={a} value={a.toString()} className="font-bold">{a} سنوات</SelectItem>)}
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-2">
-                  <Label>النوع</Label>
+                <div className="space-y-3">
+                  <Label className="text-slate-700 font-black pr-2">النوع</Label>
                   <Select value={formData.gender} onValueChange={val => setFormData(prev => ({ ...prev, gender: val }))}>
-                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectTrigger className="h-14 rounded-2xl border-slate-200 bg-slate-50 font-bold"><SelectValue /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="ذكر">ولد</SelectItem>
-                      <SelectItem value="أنثى">بنت</SelectItem>
+                      <SelectItem value="ذكر" className="font-bold">ولد</SelectItem>
+                      <SelectItem value="أنثى" className="font-bold">بنت</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-between pt-4">
-              <Button variant="ghost" onClick={() => setStep(1)}><ChevronRight className="ml-2 h-4 w-4" /> السابق</Button>
-              <Button onClick={() => setStep(3)} disabled={!formData.child_name}>
-                التالي <ChevronLeft className="mr-2 h-4 w-4" />
+            <div className="flex gap-4 pt-4">
+              <Button variant="ghost" className="h-14 flex-1 text-slate-400 font-bold" onClick={() => setStep(1)}>السابق</Button>
+              <Button className="btn-primary h-14 flex-[2] text-lg" onClick={() => setStep(3)} disabled={!formData.child_name}>
+                التالي
               </Button>
             </div>
           </motion.div>
         );
       case 3:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8" dir="rtl">
             <div className="text-center space-y-2">
-              <h2 className="text-2xl font-heading font-bold text-amber-900">موضوع المغامرة</h2>
-              <p className="text-muted-foreground">ما هو التحدي الذي سيواجهه بطلنا اليوم؟</p>
+              <h2 className="text-3xl font-black text-slate-900">موضوع المغامرة</h2>
+              <p className="text-slate-500 font-bold">إيه السلوك اللي عاوزين نشجعه النهاردة؟</p>
             </div>
 
-            <div className="grid gap-4">
-              <div className="space-y-2">
-                <Label>اختر التحدي</Label>
+            <div className="grid gap-6">
+              <div className="space-y-3">
+                <Label className="text-slate-700 font-black pr-2">اختر التحدي</Label>
                 <Select value={formData.challenge_type} onValueChange={val => setFormData(prev => ({ ...prev, challenge_type: val }))}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectTrigger className="h-14 rounded-2xl border-slate-200 bg-slate-50 font-bold"><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="شجاعة">الشجاعة ومواجهة الخوف</SelectItem>
-                    <SelectItem value="صدق">الصدق والأمانة</SelectItem>
-                    <SelectItem value="مساعدة">مساعدة الآخرين</SelectItem>
-                    <SelectItem value="نظافة">الحفاظ على البيئة والنظافة</SelectItem>
-                    <SelectItem value="دراسة">حب العلم والمدرسة</SelectItem>
-                    <SelectItem value="مخصص">تحدي مخصص...</SelectItem>
+                    <SelectItem value="شجاعة" className="font-bold">الشجاعة ومواجهة الخوف</SelectItem>
+                    <SelectItem value="صدق" className="font-bold">الصدق والأمانة</SelectItem>
+                    <SelectItem value="مساعدة" className="font-bold">مساعدة الآخرين</SelectItem>
+                    <SelectItem value="نظافة" className="font-bold">الحفاظ على البيئة والنظافة</SelectItem>
+                    <SelectItem value="دراسة" className="font-bold">حب العلم والمدرسة</SelectItem>
+                    <SelectItem value="مخصص" className="font-bold">تحدي مخصص...</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {formData.challenge_type === 'مخصص' && (
-                <div className="space-y-2">
-                  <Label>اكتب تفاصيل التحدي</Label>
+                <div className="space-y-3">
+                  <Label className="text-slate-700 font-black pr-2">اكتب تفاصيل التحدي</Label>
                   <Textarea 
+                    className="min-h-[120px] rounded-2xl border-slate-200 bg-slate-50 font-bold text-lg"
                     placeholder="مثال: يوسف يرفض أكل الخضروات، ساعده في حب الأكل الصحي..."
                     value={formData.custom_text}
                     onChange={e => setFormData(prev => ({ ...prev, custom_text: e.target.value }))}
@@ -255,10 +260,11 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
               )}
             </div>
 
-            <div className="flex justify-between pt-4">
-              <Button variant="ghost" onClick={() => setStep(2)}><ChevronRight className="ml-2 h-4 w-4" /> السابق</Button>
-              <Button className="bg-amber-600 hover:bg-amber-700 text-white" onClick={startMagic}>
-                ابتدأ السحر <Sparkles className="mr-2 h-4 w-4" />
+            <div className="flex gap-4 pt-4">
+              <Button variant="ghost" className="h-14 flex-1 text-slate-400 font-bold" onClick={() => setStep(2)}>السابق</Button>
+              <Button className="btn-primary h-14 flex-[2] text-xl group" onClick={startMagic}>
+                ابتدأ السحر
+                <Wand2 className="mr-3 h-6 w-6" />
               </Button>
             </div>
           </motion.div>
@@ -268,47 +274,49 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center py-12 space-y-8 min-h-[400px]">
+      <div className="flex flex-col items-center justify-center py-20 space-y-10 min-h-[500px]">
         <motion.div
           animate={{ 
             rotate: [0, 10, -10, 10, 0],
-            y: [0, -10, 0]
+            y: [0, -20, 0],
+            scale: [1, 1.1, 1]
           }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="text-amber-500"
+          className="text-[#7FCC00]"
         >
-          <Wand2 className="w-20 h-20" />
+          <div className="w-24 h-24 bg-lime-100 rounded-[2rem] flex items-center justify-center shadow-2xl">
+            <Wand2 className="w-12 h-12" />
+          </div>
         </motion.div>
         
-        <div className="text-center space-y-4 max-w-md w-full">
-          <h3 className="text-xl font-heading font-bold text-amber-900">{streamStatus.status || "نجمع النجوم لمغامرتك..."}</h3>
-          <div className="relative pt-1">
-             <div className="flex mb-2 items-center justify-between">
-                <div>
-                  <Badge variant="outline" className="text-amber-700 bg-amber-50 border-amber-200">
-                    {streamStatus.progress}% اكتمل
-                  </Badge>
-                </div>
-             </div>
-             <Progress value={streamStatus.progress} className="h-3 bg-amber-100" />
+        <div className="text-center space-y-6 max-w-md w-full">
+          <div className="space-y-2">
+            <h3 className="text-2xl font-black text-slate-900">{streamStatus.status || "نجمع النجوم لمغامرتك..."}</h3>
+            <p className="text-slate-500 font-bold">جاري تأليف القصة خصيصاً لـ {formData.child_name}...</p>
           </div>
-          <p className="text-sm text-muted-foreground animate-pulse">
-            جاري تأليف القصة خصيصاً لـ {formData.child_name}...
-          </p>
+          
+          <div className="relative pt-1 px-4">
+             <div className="flex mb-3 items-center justify-between font-black text-sm text-[#7FCC00]">
+                <span>اكتمال السحر</span>
+                <span>{streamStatus.progress}%</span>
+             </div>
+             <Progress value={streamStatus.progress} className="h-4 bg-slate-100 rounded-full" />
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <Card className="max-w-xl mx-auto border-amber-100 shadow-xl overflow-hidden bg-white/80 backdrop-blur">
-      <div className="h-1 bg-amber-500" style={{ width: `${(step/3)*100}%` }} />
-      <CardContent className="p-8">
+    <Card className="max-w-xl mx-auto border-none shadow-2xl overflow-hidden glass-card">
+      <div className="h-2 bg-[#7FCC00]" style={{ width: `${(step/3)*100}%` }} />
+      <CardContent className="p-10">
         <AnimatePresence mode="wait">
           {renderStep()}
         </AnimatePresence>
         {error && (
-           <div className="mt-4 p-3 rounded-lg bg-rose-50 text-rose-600 text-sm border border-rose-100">
+           <div className="mt-6 p-4 rounded-2xl bg-rose-50 text-rose-600 text-sm font-bold border border-rose-100 flex items-center gap-3">
+             <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
              {error}
            </div>
         )}
@@ -332,28 +340,25 @@ export const ShowcaseGallery = () => {
   if (loading) return <div className="grid grid-cols-1 md:grid-cols-3 gap-6">{[1,2,3].map(i => <div key={i} className="h-64 rounded-xl bg-muted animate-pulse" />)}</div>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-4">
       {samples.map((sample, idx) => (
         <motion.div 
           key={sample.id}
-          whileHover={{ y: -10 }}
+          whileHover={{ y: -12, scale: 1.02 }}
           className="group relative"
         >
-          <Card className="overflow-hidden border-none shadow-lg hover:shadow-2xl transition-all bg-amber-50/30">
+          <Card className="overflow-hidden border-none shadow-xl hover:shadow-2xl transition-all rounded-[2.5rem] bg-white">
             <div className="aspect-[3/4] overflow-hidden relative">
                <img 
                  src={idx % 2 === 0 ? './assets/card-book-open.jpg' : './assets/card-book-stack.jpg'} 
                  alt={sample.title} 
-                 className="w-full h-full object-cover transition-transform group-hover:scale-110" 
+                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                 <Button variant="secondary" className="w-full">تصفح القصة</Button>
+               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/80 p-8 pt-20">
+                  <h3 className="text-white text-xl font-black mb-3">{sample.title}</h3>
+                  <Button className="w-full btn-primary h-12">تصفح القصة</Button>
                </div>
             </div>
-            <CardHeader className="p-4 text-center">
-              <CardTitle className="text-lg font-heading text-amber-900">{sample.title}</CardTitle>
-              <Badge variant="outline" className="w-fit mx-auto border-amber-200 text-amber-700">نسخة معاينة</Badge>
-            </CardHeader>
           </Card>
         </motion.div>
       ))}
@@ -415,31 +420,31 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       
-      {/* Visual Tracker */}
-      <Card className="bg-amber-50/50 border-amber-100">
-        <CardContent className="p-6">
-          <div className="flex justify-between items-center relative">
-            <div className="absolute top-1/2 left-0 right-0 h-1 bg-amber-100 -translate-y-1/2 z-0" />
+      {/* Visual Tracker Modernized */}
+      <Card className="bg-white border-none shadow-xl rounded-[2.5rem] overflow-hidden">
+        <CardContent className="p-10">
+          <div className="flex justify-between items-center relative" dir="rtl">
+            <div className="absolute top-1/2 left-0 right-0 h-1.5 bg-slate-100 -translate-y-1/2 z-0 rounded-full" />
             <div 
-              className="absolute top-1/2 left-0 h-1 bg-amber-500 -translate-y-1/2 z-0 transition-all duration-1000" 
-              style={{ width: `${(getStatusStep() / 4) * 100}%` }}
+              className="absolute top-1/2 right-0 h-1.5 bg-[#7FCC00] -translate-y-1/2 z-0 transition-all duration-1000 rounded-full" 
+              style={{ width: `${(getStatusStep() / 3) * 100}%` }}
             />
             {[
-              { label: 'تأليف', icon: Wand2, status: 'ready' },
-              { label: 'دفع', icon: Wallet, status: 'paid' },
-              { label: 'طباعة', icon: Printer, status: 'printing' },
-              { label: 'شحن', icon: Truck, status: 'shipped' }
+              { label: 'مراجعة الطلب', icon: Wand2 },
+              { label: 'تأكيد الدفع', icon: Wallet },
+              { label: 'طباعة القصة', icon: Printer },
+              { label: 'شحن القصة', icon: Truck }
             ].map((step, idx) => (
-              <div key={idx} className="relative z-10 flex flex-col items-center gap-2">
+              <div key={idx} className="relative z-10 flex flex-col items-center gap-4">
                 <div className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors duration-500",
-                  getStatusStep() >= idx + 1 ? "bg-amber-500 border-amber-500 text-white" : "bg-white border-amber-200 text-amber-200"
+                  "w-16 h-16 rounded-[1.5rem] flex items-center justify-center border-4 transition-all duration-500 shadow-xl",
+                  getStatusStep() >= idx ? "bg-[#7FCC00] border-white text-white scale-110" : "bg-white border-slate-50 text-slate-200"
                 )}>
-                  <step.icon className="w-5 h-5" />
+                  <step.icon className="w-7 h-7" />
                 </div>
                 <span className={cn(
-                  "text-xs font-bold",
-                  getStatusStep() >= idx + 1 ? "text-amber-900" : "text-amber-300"
+                  "text-sm font-black",
+                  getStatusStep() >= idx ? "text-slate-900" : "text-slate-300"
                 )}>{step.label}</span>
               </div>
             ))}
@@ -449,14 +454,13 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
 
       {view === 'preview' ? (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
-            <Card className="overflow-hidden border-none shadow-2xl">
+          <div className="lg:col-span-2 space-y-8">
+            <Card className="overflow-hidden border-none shadow-2xl rounded-[3rem] bg-white">
               <div 
-                className="p-8 md:p-12 min-h-[600px] bg-cover bg-center relative"
-                style={{ backgroundImage: "url('./assets/bg-paper-texture.jpg')" }}
+                className="p-10 md:p-20 min-h-[700px] bg-slate-50 relative"
               >
-                <div className="absolute inset-0 bg-amber-900/5" />
-                <article className="relative prose prose-amber max-w-none text-right" dir="rtl">
+                <div className="absolute inset-0 bg-pattern opacity-10" />
+                <article className="relative prose prose-slate max-w-none text-right font-medium text-lg leading-loose" dir="rtl">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {story.content}
                   </ReactMarkdown>
@@ -465,96 +469,116 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
             </Card>
           </div>
 
-          <div className="space-y-6">
-            <Card className="sticky top-6 border-amber-200">
-              <CardHeader>
-                <CardTitle className="font-heading">نسخة {story.child_name}</CardTitle>
-                <CardDescription>هذه مسودة لقصتك السحرية</CardDescription>
+          <div className="space-y-8">
+            <Card className="sticky top-6 border-none shadow-2xl rounded-[2.5rem] bg-white p-8">
+              <CardHeader className="p-0 mb-6">
+                <div className="flex items-center gap-4 mb-4" dir="rtl">
+                   <div className="w-14 h-14 rounded-2xl bg-lime-100 flex items-center justify-center">
+                      <Sparkles className="w-7 h-7 text-[#7FCC00]" />
+                   </div>
+                   <div className="text-right">
+                      <h3 className="text-2xl font-black text-slate-900">قصة {story.child_name}</h3>
+                      <p className="text-slate-400 font-bold">بطلنا السوبر</p>
+                   </div>
+                </div>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="p-4 rounded-lg bg-amber-50 border border-amber-100 space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">التحدي:</span>
-                    <span className="font-bold">{story.challenge_type}</span>
+              <CardContent className="p-0 space-y-6">
+                <div className="p-5 rounded-[1.5rem] bg-slate-50 border border-slate-100 space-y-3 font-bold" dir="rtl">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">التحدي:</span>
+                    <span className="text-slate-900">{story.challenge_type}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">العمر:</span>
-                    <span className="font-bold">{story.age} سنوات</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">العمر:</span>
+                    <span className="text-slate-900">{story.age} سنوات</span>
                   </div>
                 </div>
                 
                 {story.status === 'ready' ? (
-                  <div className="space-y-4">
-                    <div className="text-center p-4">
-                      <p className="text-2xl font-bold text-amber-600">150 EGP</p>
-                      <p className="text-xs text-muted-foreground">شامل الطباعة الفاخرة والتوصيل</p>
+                  <div className="space-y-6">
+                    <div className="text-center bg-lime-50 p-6 rounded-[2rem] border-2 border-dashed border-lime-200">
+                      <p className="text-3xl font-black text-[#7FCC00]">١٥٠ جنية</p>
+                      <p className="text-sm text-[#7FCC00] font-bold">شامل الطباعة والشحن</p>
                     </div>
-                    <Button className="w-full bg-amber-600 hover:bg-amber-700 h-12" onClick={() => setView('payment')}>
-                      اطلب النسخة المطبوعة الآن
+                    <Button className="btn-primary w-full h-16 text-xl" onClick={() => setView('payment')}>
+                      اطلب النسخة المطبوعة
                     </Button>
                   </div>
                 ) : (
-                  <div className="text-center p-4 bg-emerald-50 rounded-lg text-emerald-700 border border-emerald-100">
-                    <Check className="w-8 h-8 mx-auto mb-2" />
-                    <p className="font-bold">تم تأكيد الطلب</p>
-                    <p className="text-xs">جاري المراجعة والبدء في الطباعة</p>
+                  <div className="text-center p-8 bg-emerald-50 rounded-[2rem] text-emerald-700 border-2 border-emerald-100">
+                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                       <Check className="w-8 h-8" />
+                    </div>
+                    <p className="font-black text-xl mb-1">تم تأكيد الطلب</p>
+                    <p className="text-sm font-bold opacity-80">جاري المراجعة والبدء في الطباعة</p>
                   </div>
                 )}
               </CardContent>
             </Card>
-            <Button variant="ghost" className="w-full" onClick={onBack}>إنشاء قصة جديدة</Button>
+            <Button variant="ghost" className="w-full h-14 text-slate-400 font-bold hover:text-slate-900" onClick={onBack}>إنشاء قصة جديدة</Button>
           </div>
         </div>
       ) : (
-        <Card className="max-w-2xl mx-auto border-amber-200">
-          <CardHeader className="text-center">
-             <CardTitle className="text-2xl font-heading">تأكيد الدفع</CardTitle>
-             <CardDescription>قم بالتحويل عبر إنستا باي وأرفق صورة الإيصال</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-8 p-8">
-             <div className="flex flex-col items-center gap-4 p-6 rounded-2xl bg-amber-50 border-2 border-dashed border-amber-200">
-                <img src="./assets/logo-instapay-eg.png" alt="InstaPay" className="h-8 opacity-80" />
-                <div className="text-center">
-                  <p className="text-sm text-muted-foreground">عنوان الدفع (IPA)</p>
-                  <p className="text-xl font-mono font-bold text-amber-900">khayal@instapay</p>
+        <Card className="max-w-xl mx-auto border-none shadow-2xl rounded-[3rem] bg-white overflow-hidden" dir="rtl">
+          <div className="bg-lime-500 p-12 text-center text-white relative">
+             <div className="absolute inset-0 bg-pattern opacity-10" />
+             <div className="relative z-10 space-y-4">
+                <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto shadow-xl group-hover:rotate-6 transition-transform">
+                   <Sparkles className="w-10 h-10 text-lime-500" />
                 </div>
-                <div className="w-48 h-48 bg-white p-2 rounded-xl shadow-inner flex items-center justify-center">
-                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=khayal@instapay" alt="QR Code" />
+                <h2 className="text-3xl font-black">أرنوب مستني!</h2>
+                <p className="text-lime-100 font-bold">حول ١٥٠ جنية بس وشوف السحر بيتحقق</p>
+             </div>
+          </div>
+          <CardContent className="space-y-10 p-10 pt-16">
+             <div className="space-y-8">
+                <div className="flex flex-col items-center gap-6 p-8 rounded-[2.5rem] bg-slate-50 border-2 border-slate-100">
+                   <div className="text-center space-y-1">
+                     <p className="text-xs text-slate-400 font-black uppercase tracking-widest text-center">عنوان الدفع (InstaPay)</p>
+                     <p className="text-2xl font-black text-slate-800 select-all cursor-copy">omarhussien22@instapay</p>
+                   </div>
+                   <div className="w-56 h-56 bg-white p-4 rounded-[2rem] shadow-2xl flex items-center justify-center border-8 border-slate-100">
+                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=omarhussien22@instapay" alt="QR Code" className="w-full" />
+                   </div>
+                </div>
+
+                <div className="space-y-4">
+                   <Label className="text-slate-700 font-black pr-2 text-lg">أرفق صورة الإيصال</Label>
+                   <div className={cn(
+                     "relative h-44 border-4 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center transition-all group",
+                     screenshot ? "border-emerald-500 bg-emerald-50" : "border-slate-100 bg-slate-50 hover:bg-slate-100/50 hover:border-lime-200"
+                   )}>
+                     {screenshot ? (
+                       <div className="flex flex-col items-center gap-3">
+                         <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-lg">
+                           <Check />
+                         </div>
+                         <span className="text-sm font-black text-emerald-700">تم اختيار الإيصال بنجاح</span>
+                         <Button variant="ghost" size="sm" className="text-slate-400 font-bold" onClick={() => setScreenshot(null)}>تغيير الصورة</Button>
+                       </div>
+                     ) : (
+                       <div className="flex flex-col items-center gap-3 text-slate-300 group-hover:text-[#7FCC00] transition-colors">
+                         <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md">
+                           <Upload className="w-8 h-8" />
+                         </div>
+                         <span className="font-black">اضغط هنا لرفع صورة الإيصال</span>
+                       </div>
+                     )}
+                     <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" onChange={handlePaymentUpload} />
+                   </div>
                 </div>
              </div>
 
-             <div className="space-y-4">
-                <Label>أرفق صورة التحويل</Label>
-                <div className={cn(
-                  "relative h-32 border-2 border-dashed rounded-xl flex items-center justify-center transition-all",
-                  screenshot ? "border-emerald-500 bg-emerald-50" : "border-amber-200 bg-amber-50/30 hover:bg-amber-50"
-                )}>
-                  {screenshot ? (
-                    <div className="flex items-center gap-3">
-                      <Check className="text-emerald-500" />
-                      <span className="text-sm font-medium">تم اختيار الصورة</span>
-                      <Button variant="ghost" size="sm" onClick={() => setScreenshot(null)}>تغيير</Button>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center gap-1 text-amber-400">
-                      <Upload className="w-8 h-8" />
-                      <span className="text-xs">اضغط هنا لرفع الصورة</span>
-                    </div>
-                  )}
-                  <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" onChange={handlePaymentUpload} />
-                </div>
-             </div>
-
-             <div className="flex gap-4">
-                <Button variant="outline" className="flex-1" onClick={() => setView('preview')}>رجوع</Button>
+             <div className="flex flex-col gap-4">
                 <Button 
-                  className="flex-[2] bg-amber-600 hover:bg-amber-700" 
+                  className="btn-primary h-20 text-2xl shadow-2xl shadow-lime-500/30" 
                   disabled={!screenshot || submitting}
                   onClick={submitPayment}
                 >
-                  {submitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Check className="w-4 h-4 mr-2" />}
-                  تأكيد إرسال الدفع
+                  {submitting ? <Loader2 className="w-6 h-6 animate-spin" /> : <Check className="w-6 h-6 ml-3" />}
+                  تأكيد الطلب والدفع
                 </Button>
+                <Button variant="ghost" className="h-14 text-slate-400 font-bold" onClick={() => setView('preview')}>رجوع مراجعة القصة</Button>
              </div>
           </CardContent>
         </Card>
