@@ -1,36 +1,21 @@
-import { streamSSE } from "./useSSE";
-
-type AppConfig = {
-  appName: string;
-  dataEndpoint: string;
-  runId: string;
-};
-
-function getConfig(): AppConfig {
-  return (window as any).__APP_CONFIG__;
-}
+// API layer for standalone Vercel deployment
+// Calls /api endpoint instead of platform RPC
 
 type RpcParams = {
   func: string;
   args?: Record<string, any>;
-  module?: string;
-};
-
-type StreamParams = RpcParams & {
-  onChunk: (data: any) => void;
-  onError?: (error: Error) => void;
 };
 
 function getUserFacingErrorMessage(status: number): string {
-  if (status === 401) return "Authentication required. Please sign in again.";
-  if (status === 403) return "You do not have access to this app workspace.";
-  if (status === 404) return "Requested app resource was not found.";
-  if (status >= 500) return "Server error while loading app data. Please try again.";
+  if (status === 401) return "Authentication required.";
+  if (status === 403) return "Access denied.";
+  if (status === 404) return "Resource not found.";
+  if (status >= 500) return "Server error. Please try again.";
   return "Request failed. Please try again.";
 }
 
-function cacheKey(func: string, args: Record<string, any>, module: string): string {
-  return `rpc:${module}:${func}:${JSON.stringify(args)}`;
+function cacheKey(func: string, args: Record<string, any>): string {
+  return `rpc:${func}:${JSON.stringify(args)}`;
 }
 
 function getCached<T>(key: string): T | undefined {
@@ -47,47 +32,30 @@ function setCache(key: string, data: unknown): void {
   try {
     sessionStorage.setItem(key, JSON.stringify(data));
   } catch {
-    // Storage full or unavailable — ignore
+    // ignore
   }
 }
 
-async function fetchRpc<T>(config: AppConfig, resolvedModule: string, func: string, args: Record<string, any>): Promise<T> {
-  const res = await fetch(config.dataEndpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Run-Id": config.runId || "" },
-    body: JSON.stringify({ module: resolvedModule, func, args }),
-    credentials: "include",
+async function fetchApi<T>(func: string, args: Record<string, any>): Promise<T> {
+  const res = await fetch('/api', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ func, args }),
   });
 
-  const contentType = res.headers.get("content-type") || "";
-  console.log("[FETCH_RESPONSE]", { status: res.status, contentType });
-
-  const raw = await res.text();
   if (!res.ok) {
-    console.error("[FETCH_ERROR]", raw.slice(0, 200));
     throw new Error(getUserFacingErrorMessage(res.status));
   }
 
-  if (!contentType.includes("application/json")) {
-    console.error("[PARSE_ERROR]", `Unexpected content-type: ${contentType}`);
-    console.log("[PARSE_ERROR_PREVIEW]", raw.slice(0, 200));
-    throw new Error(`Expected JSON response, got '${contentType || "unknown"}'`);
+  const data = await res.json();
+  if (data.error) {
+    throw new Error(data.error);
   }
-
-  try {
-    const data = JSON.parse(raw);
-    console.log("[PARSE_SUCCESS]", { keys: Object.keys(data ?? {}) });
-    return data as T;
-  } catch (err) {
-    console.error("[PARSE_ERROR]", err);
-    console.log("[PARSE_ERROR_PREVIEW]", raw.slice(0, 200));
-    throw err;
-  }
+  return data as T;
 }
 
 /**
- * Clear cached query results. Call after mutations to prevent stale data.
- * @param funcNames - Specific function names to invalidate (e.g., ['get_items', 'get_stats']). Omit to clear all.
+ * Clear cached query results.
  */
 export function invalidateCache(funcNames?: string[]): void {
   const keysToRemove: string[] = [];
@@ -100,40 +68,50 @@ export function invalidateCache(funcNames?: string[]): void {
     }
   }
   keysToRemove.forEach((k) => sessionStorage.removeItem(k));
-  console.log("[CACHE_INVALIDATE]", { funcs: funcNames || "*", cleared: keysToRemove.length });
 }
 
-export async function rpcCall<T = any>({ func, args = {}, module }: RpcParams): Promise<T> {
-  const config = getConfig();
-  const resolvedModule = module || `apps.${config.appName}.backend.main`;
-  const key = cacheKey(func, args, resolvedModule);
+/**
+ * Main RPC-style call. Translates to REST API call.
+ */
+export async function rpcCall<T = any>({ func, args = {} }: RpcParams): Promise<T> {
+  const key = cacheKey(func, args);
 
   const cached = getCached<T>(key);
   if (cached !== undefined) {
-    console.log("[CACHE_HIT]", { func, module: resolvedModule });
-    // Return cached data immediately, refresh in background
-    fetchRpc<T>(config, resolvedModule, func, args)
-      .then((fresh) => setCache(key, fresh))
-      .catch(() => {});
+    console.log("[CACHE_HIT]", { func });
+    // Refresh in background
+    fetchApi<T>(func, args).then(fresh => setCache(key, fresh)).catch(() => {});
     return cached;
   }
 
-  console.log("[FETCH_START]", { func, module: resolvedModule });
-  const data = await fetchRpc<T>(config, resolvedModule, func, args);
+  console.log("[FETCH_START]", { func });
+  const data = await fetchApi<T>(func, args);
   setCache(key, data);
   return data;
 }
 
-export async function streamCall({ func, args = {}, module, onChunk, onError }: StreamParams): Promise<void> {
-  const config = getConfig();
-  const resolvedModule = module || `apps.${config.appName}.backend.main`;
-  const streamUrl = config.dataEndpoint.replace("/data", "/data/stream");
+/**
+ * Stream call - for story generation, we use the same endpoint but
+ * the backend now returns the full result instead of streaming.
+ */
+export async function streamCall({ func, args = {}, onChunk, onError }: {
+  func: string;
+  args?: Record<string, any>;
+  onChunk: (data: any) => void;
+  onError?: (error: Error) => void;
+}): Promise<void> {
+  try {
+    // Simulate streaming progress
+    onChunk({ status: "جاري التحضير...", progress: 10 });
+    onChunk({ status: "نجمع النجوم لقصتك...", progress: 30 });
+    onChunk({ status: "نتأمل المغامرة...", progress: 60 });
 
-  await streamSSE(
-    streamUrl,
-    { module: resolvedModule, func, args },
-    onChunk,
-    onError,
-    { "X-Run-Id": config.runId || "" }
-  );
+    const result = await fetchApi<any>(func, args);
+
+    onChunk({ status: "اللمسات الأخيرة...", progress: 80, story_id: result.id });
+    onChunk({ status: "القصة جاهزة!", progress: 100, result });
+  } catch (err: any) {
+    onError?.(err);
+    throw err;
+  }
 }
