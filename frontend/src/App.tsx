@@ -11,10 +11,27 @@ import {
 import { Button } from './components/ui/button';
 import { Badge } from './components/ui/badge';
 import { CreationWizard, ShowcaseGallery, StoryResult } from './features/StoryMagic';
+import { AdminDashboard } from './features/AdminDashboard';
 
 function App() {
-  const [view, setView] = useState<'landing' | 'wizard' | 'story'>('landing');
+  const [view, setView] = useState<'landing' | 'wizard' | 'story' | 'admin'>('landing');
   const [activeStoryId, setActiveStoryId] = useState<number | null>(null);
+
+  const ADMIN_PASSWORD = 'admin123';
+
+  const openWhatsApp = (message: string) => {
+    const phone = '201152806034';
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
+  const handleAdminLogin = (password: string) => {
+    if (password === ADMIN_PASSWORD) {
+      setView('admin');
+    } else {
+      alert('كلمة المرور غير صحيحة');
+    }
+  };
 
   useEffect(() => {
     console.log("RENDER_SUCCESS");
@@ -223,6 +240,17 @@ function App() {
               className="max-w-7xl mx-auto px-6 pt-12"
             >
               <StoryResult storyId={activeStoryId} onBack={() => setView('landing')} />
+            </motion.div>
+          )}
+
+          {view === 'admin' && (
+            <motion.div
+              key="admin"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <AdminDashboard onBack={() => setView('landing')} />
             </motion.div>
           )}
         </AnimatePresence>
