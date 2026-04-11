@@ -48,58 +48,77 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrack }) =>
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section */}
-      <section className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
-          style={{ backgroundImage: "url('./assets/hero-reading-mother-1.jpg')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-background bg-mesh" />
+      <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-slate-50">
+        <div className="absolute inset-0 bg-mesh opacity-40" />
+        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#7FCC00]/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-400/10 blur-[120px] rounded-full" />
         
-        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center space-y-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pt-20">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-4"
+            className="space-y-8 text-right order-2 lg:order-1"
+            dir="rtl"
           >
-            <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-lg">
-              خيال مصر
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime-100 text-[#7FCC00] font-black text-sm mb-4">
+              <Sparkles className="w-4 h-4" />
+              أول منصة قصص أطفال بذكاء اصطناعي مصري
+            </div>
+            <h1 className="text-6xl md:text-8xl font-black tracking-tight text-slate-900 leading-[1.1]">
+              خلي طفلك <span className="text-[#7FCC00]">بطل</span> حكايته
             </h1>
-            <p className="text-xl md:text-3xl text-white/90 font-medium max-w-3xl mx-auto drop-shadow-md leading-relaxed">
-              كل طفل يستحق يكون بطل حكايته الخاصة بالعامية المصرية اللي بنحبها.
+            <p className="text-xl md:text-2xl text-slate-500 font-bold max-w-2xl leading-relaxed">
+              بنألف لطلفلك قصة مخصصة باسمه وصورته، بتساعده يواجه تحدياته اليومية بالعامية المصرية اللي بنحبها.
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button 
+                size="xl" 
+                onClick={onStart}
+                className="btn-primary text-xl px-12 py-8 rounded-[2rem] shadow-2xl shadow-lime-500/20"
+              >
+                ابدأ المغامرة الآن
+                <Sparkles className="mr-3 h-6 w-6" />
+              </Button>
+              <Button 
+                size="xl" 
+                variant="outline"
+                onClick={onTrack}
+                className="bg-white border-2 border-slate-100 text-slate-600 text-xl px-12 py-8 rounded-[2rem] hover:bg-slate-50 transition-all font-bold"
+              >
+                تتبع طلبك
+                <Truck className="mr-3 h-6 w-6" />
+              </Button>
+            </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="relative order-1 lg:order-2 flex justify-center"
           >
-            <Button 
-              size="xl" 
-              onClick={onStart}
-              className="bg-amber-500 hover:bg-amber-600 text-white text-lg px-10 py-8 rounded-full shadow-xl shadow-amber-500/20 transition-all hover:scale-105 active:scale-95"
-            >
-              ابدأ تأليف حكايتك الآن
-              <Sparkles className="mr-2 h-5 w-5" />
-            </Button>
-            <Button 
-              size="xl" 
-              variant="outline"
-              onClick={onTrack}
-              className="bg-white/10 backdrop-blur-md border-white/30 text-white text-lg px-10 py-8 rounded-full hover:bg-white/20 transition-all"
-            >
-              تتبع طلبك
-              <Truck className="mr-2 h-5 w-5" />
-            </Button>
+            <div className="relative w-full max-w-lg aspect-square">
+               <div className="absolute inset-0 bg-gradient-to-br from-[#7FCC00]/20 to-transparent rounded-[4rem] rotate-6 scale-95" />
+               <img 
+                 src="./assets/hero-mascot.png" 
+                 alt="أرنوب" 
+                 className="relative z-10 w-full h-full object-contain drop-shadow-[0_35px_35px_rgba(127,204,0,0.3)]" 
+               />
+               <div className="absolute -bottom-10 -right-10 bg-white p-6 rounded-3xl shadow-2xl z-20 hidden md:block animate-bounce-slow">
+                  <div className="flex items-center gap-3">
+                     <div className="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center">
+                        <Star className="text-amber-500 fill-amber-500" />
+                     </div>
+                     <div className="text-right">
+                        <p className="text-xs text-slate-400 font-black">تقييم الأمهات</p>
+                        <p className="font-black text-slate-900">٤.٩ / ٥ نجوم</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
           </motion.div>
-        </div>
-        
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center p-1">
-            <div className="w-1 h-2 bg-white rounded-full" />
-          </div>
         </div>
       </section>
 
@@ -134,19 +153,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrack }) =>
       </section>
 
       {/* Magical Quote Section */}
-      <section className="relative py-32 px-4 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center brightness-[0.4]"
-          style={{ backgroundImage: "url('./assets/bg-starry-night.jpg')" }}
-        />
-        <div className="absolute inset-0 bg-blue-900/40" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
-          <Star className="h-12 w-12 text-amber-400 mx-auto animate-pulse" />
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-white leading-tight">
+      <section className="relative py-40 px-4 overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 bg-pattern opacity-10" />
+        <div className="relative z-10 max-w-4xl mx-auto text-center space-y-10">
+          <div className="w-24 h-24 bg-[#7FCC00] rounded-3xl flex items-center justify-center mx-auto shadow-2xl rotate-12">
+            <Star className="h-12 w-12 text-white fill-white animate-pulse" />
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
             "القراءة للطفل هي أول خطوة في بناء عالم من الخيال اللامحدود"
           </h2>
-          <div className="h-1 w-24 bg-amber-400 mx-auto rounded-full" />
-          <p className="text-amber-100 text-xl">سعر القصة المطبوعة: ٢٠٠ جنيه مصري فقط</p>
+          <div className="flex flex-col items-center gap-4">
+             <div className="px-8 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl">
+                <p className="text-[#7FCC00] text-2xl font-black">سعر القصة المطبوعة: ٢٠٠ جنيه شامل التوصيل</p>
+             </div>
+          </div>
         </div>
       </section>
 
@@ -182,18 +202,28 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStart, onTrack }) =>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 border-t bg-white">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-amber-500" />
-            <span className="font-heading font-bold text-xl text-amber-900">خيال مصر</span>
-          </div>
-          <div className="flex gap-8 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-amber-600 transition-colors">عن المشروع</a>
-            <a href="#" className="hover:text-amber-600 transition-colors">سياسة الخصوصية</a>
-            <a href="#" className="hover:text-amber-600 transition-colors">تواصل معنا</a>
-          </div>
-          <p className="text-sm text-muted-foreground">© ٢٠٢٦ خيال مصر. جميع الحقوق محفوظة.</p>
+      <footer className="py-20 px-6 border-t bg-slate-50">
+        <div className="max-w-7xl mx-auto space-y-12">
+           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-[#7FCC00] rounded-2xl flex items-center justify-center shadow-lg">
+                  <Sparkles className="h-7 w-7 text-white" />
+                </div>
+                <span className="font-black text-3xl text-slate-900 tracking-tighter">أرنوب</span>
+              </div>
+              <div className="flex flex-wrap justify-center gap-10 text-lg font-bold text-slate-400">
+                <a href="#" className="hover:text-[#7FCC00] transition-colors">عن أرنوب</a>
+                <a href="#" className="hover:text-[#7FCC00] transition-colors">سياسة الخصوصية</a>
+                <a href="#" className="hover:text-[#7FCC00] transition-colors">تواصل معنا</a>
+              </div>
+           </div>
+           
+           <div className="pt-12 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 font-bold">
+              <p>© ٢٠٢٦ أرنوب. جميع الحقوق محفوظة.</p>
+              <div className="flex items-center gap-2">
+                 صُنع بكل <Heart className="w-4 h-4 text-rose-500 fill-rose-500" /> في مصر
+              </div>
+           </div>
         </div>
       </footer>
     </div>

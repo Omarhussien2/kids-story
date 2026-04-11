@@ -229,7 +229,7 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ storyId }) => {
           <div className="flex-1 space-y-4 text-center md:text-right">
             <h3 className="text-2xl font-bold font-heading text-amber-900">حكايتكم بتتحول لواقع!</h3>
             <p className="text-muted-foreground leading-relaxed">
-              فريق خيال مصر مهتم جداً بكل تفصيلة في قصة بطلنا الصغير. القصة دلوقتي في مرحلة {stages[currentIdx].label}، وهتوصل لكم قريب جداً.
+              فريق أرنوب مهتم جداً بكل تفصيلة في قصة بطلنا الصغير. القصة دلوقتي في مرحلة {stages[currentIdx].label}، وهتوصل لكم قريب جداً.
             </p>
             <div className="pt-2 flex flex-wrap justify-center md:justify-end gap-3">
               <Button variant="outline" size="sm" onClick={() => window.print()}>

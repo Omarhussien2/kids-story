@@ -223,10 +223,10 @@ function App() {
                         <div className="w-10 h-10 bg-[#7FCC00] rounded-xl flex items-center justify-center transform rotate-3">
                           <Sparkles className="w-6 h-6 text-white" />
                         </div>
-                        <span className="font-heading text-xl font-black text-slate-950">خيال مصر</span>
+                        <span className="font-heading text-xl font-black text-slate-950">أرنوب</span>
                       </div>
                       <p className="text-slate-500 font-medium leading-relaxed max-w-md">
-                        بنكبر معاك ومع طفلك، بنحاول نخلي القراءة والتعلم تجربة سحرية مش مجرد واجب، خيال مصر هو بوابتك لعالم مخصص بالكامل لبطل بيتك.
+                        بنكبر معاك ومع طفلك، بنحاول نخلي القراءة والتعلم تجربة سحرية مش مجرد واجب، أرنوب هو بوابتك لعالم مخصص بالكامل لبطل بيتك.
                       </p>
                     </div>
                     
@@ -235,7 +235,7 @@ function App() {
                       <ul className="space-y-3 text-slate-500 font-bold">
                         <li><button onClick={() => setView('landing')} className="hover:text-[#7FCC00]">الرئيسية</button></li>
                         <li><button className="hover:text-[#7FCC00]">قصصنا</button></li>
-                        <li><button onClick={() => openWhatsApp("أهلاً خيال مصر، أريد الاستفسار عن خدمة القصص")} className="hover:text-[#7FCC00]">واتساب</button></li>
+                        <li><button onClick={() => openWhatsApp("أهلاً أرنوب، أريد الاستفسار عن خدمة القصص")} className="hover:text-[#7FCC00]">واتساب</button></li>
                         <li><button onClick={() => {
                            const p = prompt("أدخل كلمة مرور الإدارة:");
                            if(p) handleAdminLogin(p);
@@ -253,7 +253,7 @@ function App() {
                   </div>
                   
                   <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-sm font-bold text-slate-400">
-                    <p>© 2026 جميع الحقوق محفوظة لـ خيال مصر</p>
+                    <p>© 2026 جميع الحقوق محفوظة لـ أرنوب</p>
                     <p>صنع بكل حب في مصر 🇪🇬</p>
                   </div>
                 </div>

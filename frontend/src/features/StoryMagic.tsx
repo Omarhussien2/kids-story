@@ -130,52 +130,6 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
     switch(step) {
       case 1:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
-            <div className="text-center space-y-3">
-              <h2 className="text-3xl font-black text-slate-900 tracking-tight">قربنا نخلص!</h2>
-              <p className="text-slate-500 font-bold">ارفع صورة بطلنا الصغير عشان السحر يكمل</p>
-            </div>
-            
-            <div className="flex flex-col items-center justify-center gap-6">
-              <div className={cn(
-                "relative w-56 h-56 rounded-[3rem] border-4 border-dashed border-slate-200 flex items-center justify-center overflow-hidden bg-slate-50 transition-all group hover:border-[#7FCC00]",
-                formData.photo && "border-solid border-[#7FCC00] shadow-2xl scale-105"
-              )}>
-                {formData.photo ? (
-                  <img src={formData.photo} alt="Preview" className="w-full h-full object-cover" />
-                ) : (
-                  <div className="flex flex-col items-center gap-3 text-slate-300 group-hover:text-[#7FCC00] transition-colors">
-                    <Camera className="w-16 h-16" />
-                    <span className="text-xs font-black">ارفع الصورة هنا</span>
-                  </div>
-                )}
-                <input 
-                  type="file" 
-                  accept="image/*" 
-                  className="absolute inset-0 opacity-0 cursor-pointer" 
-                  onChange={handlePhotoUpload}
-                />
-              </div>
-              <Button className="btn-outline h-12">
-                {formData.photo ? 'تغيير الصورة' : 'اختر صورة من موبايلك'}
-                <input 
-                  type="file" 
-                  accept="image/*" 
-                  className="absolute inset-0 opacity-0 cursor-pointer" 
-                  onChange={handlePhotoUpload}
-                />
-              </Button>
-            </div>
-
-            <div className="flex justify-center pt-4">
-              <Button className="btn-primary w-full h-14 text-lg" onClick={() => setStep(2)}>
-                التالي
-              </Button>
-            </div>
-          </motion.div>
-        );
-      case 2:
-        return (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8" dir="rtl">
             <div className="text-center space-y-2">
               <h2 className="text-3xl font-black text-slate-900">بيانات البطل</h2>
@@ -215,15 +169,14 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
               </div>
             </div>
 
-            <div className="flex gap-4 pt-4">
-              <Button variant="ghost" className="h-14 flex-1 text-slate-400 font-bold" onClick={() => setStep(1)}>السابق</Button>
-              <Button className="btn-primary h-14 flex-[2] text-lg" onClick={() => setStep(3)} disabled={!formData.child_name}>
+            <div className="flex pt-4">
+              <Button className="btn-primary w-full h-14 text-lg" onClick={() => setStep(2)} disabled={!formData.child_name}>
                 التالي
               </Button>
             </div>
           </motion.div>
         );
-      case 3:
+      case 2:
         return (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8" dir="rtl">
             <div className="text-center space-y-2">
@@ -258,6 +211,53 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
                   />
                 </div>
               )}
+            </div>
+
+            <div className="flex gap-4 pt-4">
+              <Button variant="ghost" className="h-14 flex-1 text-slate-400 font-bold" onClick={() => setStep(1)}>السابق</Button>
+              <Button className="btn-primary h-14 flex-[2] text-lg" onClick={() => setStep(3)}>
+                التالي
+              </Button>
+            </div>
+          </motion.div>
+        );
+      case 3:
+        return (
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
+            <div className="text-center space-y-3">
+              <h2 className="text-3xl font-black text-slate-900 tracking-tight">آخر خطوة!</h2>
+              <p className="text-slate-500 font-bold">ارفع صورة بطلنا الصغير عشان السحر يكمل</p>
+            </div>
+            
+            <div className="flex flex-col items-center justify-center gap-6">
+              <div className={cn(
+                "relative w-56 h-56 rounded-[3rem] border-4 border-dashed border-slate-200 flex items-center justify-center overflow-hidden bg-slate-50 transition-all group hover:border-[#7FCC00]",
+                formData.photo && "border-solid border-[#7FCC00] shadow-2xl scale-105"
+              )}>
+                {formData.photo ? (
+                  <img src={formData.photo} alt="Preview" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="flex flex-col items-center gap-3 text-slate-300 group-hover:text-[#7FCC00] transition-colors">
+                    <Camera className="w-16 h-16" />
+                    <span className="text-xs font-black">ارفع الصورة هنا</span>
+                  </div>
+                )}
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  className="absolute inset-0 opacity-0 cursor-pointer" 
+                  onChange={handlePhotoUpload}
+                />
+              </div>
+              <Button className="btn-outline h-12">
+                {formData.photo ? 'تغيير الصورة' : 'اختر صورة من موبايلك'}
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  className="absolute inset-0 opacity-0 cursor-pointer" 
+                  onChange={handlePhotoUpload}
+                />
+              </Button>
             </div>
 
             <div className="flex gap-4 pt-4">
@@ -330,14 +330,38 @@ export const ShowcaseGallery = () => {
   const [samples, setSamples] = useState<Sample[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const fallbackSamples: Sample[] = [
+    { id: 101, title: 'يوسف في غابة الأرقام', file_url: './assets/card-book-open.jpg', type: 'story' },
+    { id: 102, title: 'مريم وبساط الريح السحري', file_url: './assets/card-book-stack.jpg', type: 'story' },
+    { id: 103, title: 'أرنوب وسر الجزرة العملاقة', file_url: './assets/card-character-1.jpg', type: 'story' }
+  ];
+
   useEffect(() => {
-    rpcCall({ func: 'get_samples' }).then(res => {
-      setSamples(res);
-      setLoading(false);
-    });
+    const loadSamples = async () => {
+      try {
+        const res = await rpcCall({ func: 'get_samples' });
+        if (Array.isArray(res) && res.length > 0) {
+          setSamples(res);
+        } else {
+          setSamples(fallbackSamples);
+        }
+      } catch (err) {
+        console.error('Gallery Load Error:', err);
+        setSamples(fallbackSamples);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadSamples();
   }, []);
 
-  if (loading) return <div className="grid grid-cols-1 md:grid-cols-3 gap-6">{[1,2,3].map(i => <div key={i} className="h-64 rounded-xl bg-muted animate-pulse" />)}</div>;
+  if (loading) return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-4">
+      {[1,2,3].map(i => (
+        <div key={i} className="aspect-[3/4] rounded-[2.5rem] bg-slate-100 animate-pulse border-4 border-slate-50" />
+      ))}
+    </div>
+  );
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-4">
@@ -347,16 +371,20 @@ export const ShowcaseGallery = () => {
           whileHover={{ y: -12, scale: 1.02 }}
           className="group relative"
         >
-          <Card className="overflow-hidden border-none shadow-xl hover:shadow-2xl transition-all rounded-[2.5rem] bg-white">
+          <Card className="overflow-hidden border-none shadow-xl hover:shadow-2xl transition-all rounded-[2.5rem] bg-white ring-1 ring-slate-100">
             <div className="aspect-[3/4] overflow-hidden relative">
                <img 
-                 src={idx % 2 === 0 ? './assets/card-book-open.jpg' : './assets/card-book-stack.jpg'} 
+                 src={sample.file_url || (idx % 2 === 0 ? './assets/card-book-open.jpg' : './assets/card-book-stack.jpg')} 
                  alt={sample.title} 
                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                 onError={(e) => {
+                   (e.target as HTMLImageElement).src = './assets/card-book-open.jpg';
+                 }}
                />
-               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/80 p-8 pt-20">
-                  <h3 className="text-white text-xl font-black mb-3">{sample.title}</h3>
-                  <Button className="w-full btn-primary h-12">تصفح القصة</Button>
+               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent p-8 pt-20">
+                  <Badge className="bg-[#7FCC00] text-white border-none mb-3 font-black">قصة مميزة</Badge>
+                  <h3 className="text-white text-2xl font-black mb-4 drop-shadow-md">{sample.title}</h3>
+                  <Button className="w-full btn-primary h-12 text-lg rounded-2xl shadow-lg">تصفح القصة</Button>
                </div>
             </div>
           </Card>
@@ -399,7 +427,7 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
     try {
       await rpcCall({ 
         func: 'submit_payment', 
-        args: { story_id: storyId, screenshot_base64: screenshot, amount: 150.0 } 
+        args: { story_id: storyId, screenshot_base64: screenshot, amount: 200.0 } 
       });
       fetchDetails();
     } catch (err) {
@@ -497,7 +525,7 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
                 {story.status === 'ready' ? (
                   <div className="space-y-6">
                     <div className="text-center bg-lime-50 p-6 rounded-[2rem] border-2 border-dashed border-lime-200">
-                      <p className="text-3xl font-black text-[#7FCC00]">١٥٠ جنية</p>
+                      <p className="text-3xl font-black text-[#7FCC00]">٢٠٠ جنية</p>
                       <p className="text-sm text-[#7FCC00] font-bold">شامل الطباعة والشحن</p>
                     </div>
                     <Button className="btn-primary w-full h-16 text-xl" onClick={() => setView('payment')}>
@@ -527,7 +555,7 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
                    <Sparkles className="w-10 h-10 text-lime-500" />
                 </div>
                 <h2 className="text-3xl font-black">أرنوب مستني!</h2>
-                <p className="text-lime-100 font-bold">حول ١٥٠ جنية بس وشوف السحر بيتحقق</p>
+                <p className="text-lime-100 font-bold">حول ٢٠٠ جنية بس وشوف السحر بيتحقق</p>
              </div>
           </div>
           <CardContent className="space-y-10 p-10 pt-16">
