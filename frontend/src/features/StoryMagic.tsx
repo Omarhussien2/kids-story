@@ -138,7 +138,7 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
             
             <div className="grid gap-6">
               <div className="space-y-3">
-                <Label className="text-slate-700 font-black pr-2">اسم الطفل</Label>
+                <Label className="text-slate-700 font-black ps-2">اسم الطفل</Label>
                 <Input 
                   className="h-14 rounded-2xl border-slate-200 bg-slate-50 font-bold text-lg focus:border-[#7FCC00] focus:ring-[#7FCC00]"
                   placeholder="مثال: يوسف، مريم..." 
@@ -148,7 +148,7 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <Label className="text-slate-700 font-black pr-2">العمر</Label>
+                  <Label className="text-slate-700 font-black ps-2">العمر</Label>
                   <Select value={formData.age} onValueChange={val => setFormData(prev => ({ ...prev, age: val }))}>
                     <SelectTrigger className="h-14 rounded-2xl border-slate-200 bg-slate-50 font-bold"><SelectValue /></SelectTrigger>
                     <SelectContent>
@@ -157,7 +157,7 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
                   </Select>
                 </div>
                 <div className="space-y-3">
-                  <Label className="text-slate-700 font-black pr-2">النوع</Label>
+                  <Label className="text-slate-700 font-black ps-2">النوع</Label>
                   <Select value={formData.gender} onValueChange={val => setFormData(prev => ({ ...prev, gender: val }))}>
                     <SelectTrigger className="h-14 rounded-2xl border-slate-200 bg-slate-50 font-bold"><SelectValue /></SelectTrigger>
                     <SelectContent>
@@ -186,7 +186,7 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
 
             <div className="grid gap-6">
               <div className="space-y-3">
-                <Label className="text-slate-700 font-black pr-2">اختر التحدي</Label>
+                <Label className="text-slate-700 font-black ps-2">اختر التحدي</Label>
                 <Select value={formData.challenge_type} onValueChange={val => setFormData(prev => ({ ...prev, challenge_type: val }))}>
                   <SelectTrigger className="h-14 rounded-2xl border-slate-200 bg-slate-50 font-bold"><SelectValue /></SelectTrigger>
                   <SelectContent>
@@ -202,7 +202,7 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
 
               {formData.challenge_type === 'مخصص' && (
                 <div className="space-y-3">
-                  <Label className="text-slate-700 font-black pr-2">اكتب تفاصيل التحدي</Label>
+                  <Label className="text-slate-700 font-black ps-2">اكتب تفاصيل التحدي</Label>
                   <Textarea 
                     className="min-h-[120px] rounded-2xl border-slate-200 bg-slate-50 font-bold text-lg"
                     placeholder="مثال: يوسف يرفض أكل الخضروات، ساعده في حب الأكل الصحي..."
@@ -264,7 +264,7 @@ export const CreationWizard = ({ onComplete }: { onComplete: (story: any) => voi
               <Button variant="ghost" className="h-14 flex-1 text-slate-400 font-bold" onClick={() => setStep(2)}>السابق</Button>
               <Button className="btn-primary h-14 flex-[2] text-xl group" onClick={startMagic}>
                 ابتدأ السحر
-                <Wand2 className="mr-3 h-6 w-6" />
+                <Wand2 className="me-3 h-6 w-6" />
               </Button>
             </div>
           </motion.div>
@@ -488,7 +488,7 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
                 className="p-10 md:p-20 min-h-[700px] bg-slate-50 relative"
               >
                 <div className="absolute inset-0 bg-pattern opacity-10" />
-                <article className="relative prose prose-slate max-w-none text-right font-medium text-lg leading-loose" dir="rtl">
+                <article className="relative prose prose-slate max-w-none text-start font-medium text-lg leading-loose" dir="rtl">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {story.content}
                   </ReactMarkdown>
@@ -504,14 +504,14 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
                    <div className="w-14 h-14 rounded-2xl bg-lime-100 flex items-center justify-center">
                       <Sparkles className="w-7 h-7 text-[#7FCC00]" />
                    </div>
-                   <div className="text-right">
+                   <div className="text-start">
                       <h3 className="text-2xl font-black text-slate-900">قصة {story.child_name}</h3>
                       <p className="text-slate-400 font-bold">بطلنا السوبر</p>
                    </div>
                 </div>
               </CardHeader>
               <CardContent className="p-0 space-y-6">
-                <div className="p-5 rounded-[1.5rem] bg-slate-50 border border-slate-100 space-y-3 font-bold" dir="rtl">
+                <div className="ps-5 rounded-[1.5rem] bg-slate-50 border border-slate-100 space-y-3 font-bold" dir="rtl">
                   <div className="flex justify-between items-center">
                     <span className="text-slate-400">التحدي:</span>
                     <span className="text-slate-900">{story.challenge_type}</span>
@@ -560,7 +560,7 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
           </div>
           <CardContent className="space-y-10 p-10 pt-16">
              <div className="space-y-8">
-                <div className="flex flex-col items-center gap-6 p-8 rounded-[2.5rem] bg-slate-50 border-2 border-slate-100">
+                <div className="flex flex-col items-center gap-6 ps-8 rounded-[2.5rem] bg-slate-50 border-2 border-slate-100">
                    <div className="text-center space-y-1">
                      <p className="text-xs text-slate-400 font-black uppercase tracking-widest text-center">عنوان الدفع (InstaPay)</p>
                      <p className="text-2xl font-black text-slate-800 select-all cursor-copy">omarhussien22@instapay</p>
@@ -571,7 +571,7 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
                 </div>
 
                 <div className="space-y-4">
-                   <Label className="text-slate-700 font-black pr-2 text-lg">أرفق صورة الإيصال</Label>
+                   <Label className="text-slate-700 font-black ps-2 text-lg">أرفق صورة الإيصال</Label>
                    <div className={cn(
                      "relative h-44 border-4 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center transition-all group",
                      screenshot ? "border-emerald-500 bg-emerald-50" : "border-slate-100 bg-slate-50 hover:bg-slate-100/50 hover:border-lime-200"
@@ -603,7 +603,7 @@ export const StoryResult = ({ storyId, onBack }: { storyId: number, onBack: () =
                   disabled={!screenshot || submitting}
                   onClick={submitPayment}
                 >
-                  {submitting ? <Loader2 className="w-6 h-6 animate-spin" /> : <Check className="w-6 h-6 ml-3" />}
+                  {submitting ? <Loader2 className="w-6 h-6 animate-spin" /> : <Check className="w-6 h-6 me-3" />}
                   تأكيد الطلب والدفع
                 </Button>
                 <Button variant="ghost" className="h-14 text-slate-400 font-bold" onClick={() => setView('preview')}>رجوع مراجعة القصة</Button>

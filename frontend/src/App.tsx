@@ -6,6 +6,7 @@ import {
   Star, 
   Heart, 
   Gift,
+  ArrowLeft,
   ArrowRight,
   Menu,
   ShieldCheck,
@@ -55,8 +56,8 @@ function App() {
     <div className="min-h-screen bg-slate-50 selection:bg-lime-200 selection:text-lime-900 overflow-x-hidden font-body">
       {/* Dynamic Background Blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-lime-400/10 blur-[100px] rounded-full" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-blue-400/5 blur-[80px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-lime-400/10 blur-[100px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-blue-400/5 blur-[80px] rounded-full" />
       </div>
       
       {/* Navigation */}
@@ -101,7 +102,7 @@ function App() {
                       animate={{ scale: 1, opacity: 1 }}
                       className="inline-flex items-center gap-2 bg-lime-50 text-[#7FCC00] px-4 py-2 rounded-full font-bold text-sm border border-lime-100"
                     >
-                      <Sparkles className="w-4 h-4 fill-current" />
+                      <ArrowLeft className="w-4 h-4" />
                       جديد: أول حواديت مألفة بالذكاء الاصطناعي
                     </motion.div>
                     
@@ -145,10 +146,10 @@ function App() {
                       transition={{ duration: 3, repeat: Infinity }}
                       className="absolute -top-10 -right-10 bg-white p-6 rounded-[2.5rem] shadow-2xl flex items-center gap-4 border border-slate-50"
                     >
-                      <div className="w-12 h-12 bg-lime-100 rounded-2xl flex items-center justify-center text-[#7FCC00]">
+                      <div className="me-4 w-12 h-12 bg-lime-100 rounded-2xl flex items-center justify-center text-[#7FCC00]">
                         <Star className="w-6 h-6 fill-current" />
                       </div>
-                      <div className="text-right" dir="rtl">
+                      <div className="text-start" dir="rtl">
                         <p className="text-2xl font-black text-slate-900 leading-none">٤.٩ / ٥</p>
                         <p className="text-xs font-bold text-slate-400">تقييم عائلاتنا</p>
                       </div>
@@ -168,7 +169,7 @@ function App() {
                     <div className={cn("w-16 h-16 rounded-3xl flex items-center justify-center", stat.bg, stat.color)}>
                       <stat.icon className="w-8 h-8" />
                     </div>
-                    <div className="text-right" dir="rtl">
+                    <div className="text-start" dir="rtl">
                       <h4 className="text-4xl font-black text-slate-900 leading-none mb-2">{stat.value}</h4>
                       <p className="text-slate-400 font-bold">{stat.label}</p>
                     </div>
@@ -193,7 +194,7 @@ function App() {
                         <div className={cn("w-20 h-20 rounded-[2rem] shadow-xl text-white flex items-center justify-center text-3xl transition-transform group-hover:scale-110 group-hover:rotate-3", item.color)}>
                           <span className="text-4xl">{item.icon}</span>
                         </div>
-                        <div className="absolute -top-3 -right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg font-black text-[#7FCC00]">
+                        <div className="absolute -top-3 -left-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg font-black text-[#7FCC00]">
                           {item.step}
                         </div>
                       </div>
@@ -217,7 +218,7 @@ function App() {
               {/* Footer Modernized */}
               <footer className="border-t border-slate-200 bg-white relative z-10">
                 <div className="max-w-7xl mx-auto px-6 py-16">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-12 text-right" dir="rtl">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-12 text-start" dir="rtl">
                     <div className="md:col-span-2 space-y-6">
                       <div className="flex items-center gap-2">
                         <div className="w-10 h-10 bg-[#7FCC00] rounded-xl flex items-center justify-center transform rotate-3">
