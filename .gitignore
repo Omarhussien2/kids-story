@@ -31,3 +31,6 @@ npm-debug.log*
 
 # Uploads & Payments data
 backend/data/
+
+.vercel
+.env*.local
