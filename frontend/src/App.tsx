@@ -126,48 +126,35 @@ function App() {
                 </div>
 
                 {/* Hero Illustration Area */}
-                <motion.div 
-                  className="relative order-1 lg:order-2 flex justify-center lg:justify-end"
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <div className="relative w-full max-w-[500px] aspect-square">
-                     <div className="absolute inset-0 bg-lime-400/20 rounded-[4rem] rotate-6 scale-95" />
-                     <div className="absolute inset-0 bg-slate-900 rounded-[3.5rem] overflow-hidden shadow-2xl border-4 border-white">
-                        <img 
-                          src="./assets/hero-magical-book.jpg" 
-                          alt="Magical Story" 
-                          className="w-full h-full object-cover opacity-80" 
-                  <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
+                <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
+                  <motion.div 
+                    className="relative"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.3, type: "spring" }}
+                  >
+                    <div className="absolute inset-0 bg-lime-400 opacity-20 blur-[120px] rounded-full" />
+                    <img 
+                      src="./assets/hero-mascot.png" 
+                      alt="Arnowb Mascot" 
+                      className="relative z-10 w-full max-w-lg drop-shadow-[0_30px_60px_rgba(127,204,0,0.4)]" 
+                    />
+                    {/* Floating Stats - Image Style */}
                     <motion.div 
-                      className="relative"
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.3, type: "spring" }}
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                      className="absolute -top-10 -right-10 bg-white p-6 rounded-[2.5rem] shadow-2xl flex items-center gap-4 border border-slate-50"
                     >
-                      <div className="absolute inset-0 bg-lime-400 opacity-20 blur-[120px] rounded-full" />
-                      <img 
-                        src="./assets/hero-mascot.png" 
-                        alt="Arnowb Mascot" 
-                        className="relative z-10 w-full max-w-lg drop-shadow-[0_30px_60px_rgba(127,204,0,0.4)]" 
-                      />
-                      {/* Floating Stats - Image Style */}
-                      <motion.div 
-                        animate={{ y: [0, -10, 0] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                        className="absolute -top-10 -right-10 bg-white p-6 rounded-[2.5rem] shadow-2xl flex items-center gap-4 border border-slate-50"
-                      >
-                        <div className="w-12 h-12 bg-lime-100 rounded-2xl flex items-center justify-center text-[#7FCC00]">
-                          <Star className="w-6 h-6 fill-current" />
-                        </div>
-                        <div className="text-right" dir="rtl">
-                          <p className="text-2xl font-black text-slate-900 leading-none">٤.٩ / ٥</p>
-                          <p className="text-xs font-bold text-slate-400">تقييم عائلاتنا</p>
-                        </div>
-                      </motion.div>
+                      <div className="w-12 h-12 bg-lime-100 rounded-2xl flex items-center justify-center text-[#7FCC00]">
+                        <Star className="w-6 h-6 fill-current" />
+                      </div>
+                      <div className="text-right" dir="rtl">
+                        <p className="text-2xl font-black text-slate-900 leading-none">٤.٩ / ٥</p>
+                        <p className="text-xs font-bold text-slate-400">تقييم عائلاتنا</p>
+                      </div>
                     </motion.div>
-                  </div>
+                  </motion.div>
+                </div>
               </section>
 
               {/* Stats Bar */}
